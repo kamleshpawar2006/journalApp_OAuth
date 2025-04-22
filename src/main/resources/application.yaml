@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  output:
+    ansi:
+      enabled: ALWAYS
+#  profiles:
+#    active: dev   # Change to 'prod' when deploying to production
+
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
