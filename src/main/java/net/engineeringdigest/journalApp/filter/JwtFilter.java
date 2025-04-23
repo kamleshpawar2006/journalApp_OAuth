@@ -62,14 +62,6 @@ public class JwtFilter extends OncePerRequestFilter {
                         .collect(Collectors.toList());
 
                 if(!jwtUtil.isTokenExpired(jwt)) {
-//                below statements can be written as
-//                Because sometimes only username is needed (lightweight cases).
-//                And sometimes full user object is needed (secure, complex systems).
-//                Spring gives freedom.
-//                Example:
-//                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails.getUsername(),userDetails.getPassword(), authorities);
-//                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails.getUsername(), null, authorities);
-//                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
                     UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
                     auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     response.addHeader("hi", "test header text");
