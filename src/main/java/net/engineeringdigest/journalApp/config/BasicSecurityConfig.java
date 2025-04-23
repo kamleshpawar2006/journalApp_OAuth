@@ -39,7 +39,7 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
                         .loginPage("/login")
                         .successHandler(oAuth2LoginSuccessHandler)
                 );
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().csrf().disable();
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().csrf().disable().cors();
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
 

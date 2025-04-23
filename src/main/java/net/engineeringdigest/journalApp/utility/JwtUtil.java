@@ -37,14 +37,13 @@ public class JwtUtil {
 //    }
 
     private String createToken(Map<String, Object> claims, String userName) {
-        long expirationMillis = 3600000; // 1 hour
         return Jwts.builder()
                 .claims(claims)
                 .subject(userName)
                 .header().empty().add("type", "JWT")
                 .and()
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + expirationMillis))
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 30 * 1 )) // 1 min
                 .signWith(Keys.hmacShaKeyFor(SECRET_KEY.getBytes()), SignatureAlgorithm.HS512)
                 .compact();
     }

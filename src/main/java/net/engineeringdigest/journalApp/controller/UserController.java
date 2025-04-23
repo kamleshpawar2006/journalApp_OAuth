@@ -10,9 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 @RequestMapping("/user")
@@ -38,6 +36,20 @@ public class UserController {
             return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+
+    @GetMapping("/validateJwt")
+    public ResponseEntity<?> validateJwt() {
+        Map<String, String> response = new HashMap<>();
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            UserEntity userInDB = userService.findByUserName(authentication.getName());
+            response.put("status", "valid");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception ex) {
+            response.put("status", "Invalid");
+            return new ResponseEntity<>(ex, HttpStatus.UNAUTHORIZED);
         }
     }
 
