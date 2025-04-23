@@ -32,6 +32,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         Map<String, Object> attributes = token.getPrincipal().getAttributes();
 
         String email = (String) attributes.get("email");
+        String pictureUrl = (String) attributes.get("picture");
 
         // Check if user exists, else create
         UserEntity user = userService.findByUserName(email);
@@ -40,7 +41,11 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
             user.setUserName(email);
             user.setPassword(""); // OAuth doesn't use password
             user.setRoles("USER");
+            user.setProfilePicture(pictureUrl);
             userService.createUser(user);
+        } else {
+            user.setProfilePicture(pictureUrl);
+            userService.saveUser(user);
         }
 
         // Load UserDetails and generate your JWT

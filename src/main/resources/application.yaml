@@ -1,7 +1,9 @@
 server:
   port: 8080
-# http://localhost:8080/login/oauth2/code/google - should be the redirect URL in Google Cloud Console and same should be mentioned below in spring:security:oauth2:client:registration:google:redirect-uri: "{baseUrl}/login/oauth2/code/google" . baseUrl will be http:8080//
+# http://localhost:8080/login/oauth2/code/google - should be the redirect URL in Google Cloud Console
+# and same should be mentioned below in spring:security:oauth2:client:registration:google:redirect-uri: "{baseUrl}/login/oauth2/code/google" . baseUrl will be http:8080//
 # and keep the Authorized JavaScript origins empty
+# /login/oauth2/code/google should be there as it is returned by Google
 spring:
   mvc:
     pathmatch:

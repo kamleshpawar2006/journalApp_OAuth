@@ -23,8 +23,9 @@ export class LoginComponent {
       this.router.navigate(['/dashboard']);
     } else {
       this.jwtService.validateToken().pipe(
-        map(response => {
+        map((response: any) => {
           console.log(response);
+          this.jwtService.setProfilePicture(response['profileImage']);
           this.router.navigate(['/dashboard']);
         }),
         catchError(error => {

@@ -30,6 +30,17 @@ public class UserEntity {
     @Column(name = "roles")
     private String roles;
 
+    @Column(name = "profile_picture")
+    private String profilePicture;
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
     // Custom Getter: Convert CSV String to List<Integer>
     public List<Integer> getJournalEntries() {
         if (journalEntries == null || journalEntries.trim().isEmpty()) {

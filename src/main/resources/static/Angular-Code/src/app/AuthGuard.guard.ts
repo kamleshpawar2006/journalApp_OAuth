@@ -18,7 +18,9 @@ export class AuthGuard implements CanActivate {
     }
 
     return this.jwtService.validateToken().pipe(
-      map(response => {
+      map((response: any) => {
+        console.log(response);
+        this.jwtService.setProfilePicture(response['profileImage']);
         return true;
       }),
       catchError(error => {

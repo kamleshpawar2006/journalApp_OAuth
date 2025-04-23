@@ -43,7 +43,7 @@ public class JwtUtil {
                 .header().empty().add("type", "JWT")
                 .and()
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 30 * 1 )) // 1 min
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 )) // 1 Hr
                 .signWith(Keys.hmacShaKeyFor(SECRET_KEY.getBytes()), SignatureAlgorithm.HS512)
                 .compact();
     }

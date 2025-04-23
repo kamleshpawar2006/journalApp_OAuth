@@ -39,20 +39,6 @@ public class UserController {
         }
     }
 
-    @GetMapping("/validateJwt")
-    public ResponseEntity<?> validateJwt() {
-        Map<String, String> response = new HashMap<>();
-        try {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            UserEntity userInDB = userService.findByUserName(authentication.getName());
-            response.put("status", "valid");
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (Exception ex) {
-            response.put("status", "Invalid");
-            return new ResponseEntity<>(ex, HttpStatus.UNAUTHORIZED);
-        }
-    }
-
     @PutMapping
     public ResponseEntity<HttpStatus> updateUser(@RequestBody UserEntity user) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
