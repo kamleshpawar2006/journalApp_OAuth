@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   title = 'journal-spa';
   profilePicture: any = null;
+  tokenExpiredMessage: string | null = null;
   
   constructor(private jwtService: JwtService) {
     
@@ -26,6 +27,15 @@ export class AppComponent {
         console.log('Profile Picture:', this.profilePicture);
       }
     });
+
+    this.jwtService.getRefreshTokenExpired().subscribe((expired) => {
+      if (expired) {
+        this.tokenExpiredMessage = 'Refresh token expired. Please log in again.';
+        console.log('Refresh token expired');
+        this.profilePicture = null;
+      }
+    });
+
   }
   
 }

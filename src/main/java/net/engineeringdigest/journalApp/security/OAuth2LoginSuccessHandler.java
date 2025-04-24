@@ -51,9 +51,10 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         // Load UserDetails and generate your JWT
         UserDetails userDetails = userDetailsImpl.loadUserByUsername(email);
         String jwt = jwtUtil.generateToken(userDetails, user.getUserId());
+        String refreshToken = jwtUtil.generateRefreshToken(email);
 
         // Redirect to frontend with your JWT
-        String redirectUrl = "http://localhost:4200/login?token=" + jwt; // change host and port to match UI application. Example: http://localhost/4200 for angular app.
+        String redirectUrl = "http://localhost:4200/login?token=" + jwt + "&refresh=" + refreshToken; // change host and port to match UI application. Example: http://localhost/4200 for angular app.
         // if angular app is stored inside spring boot's static folder then this redirectUrl will have same host as backed server
         // in addition to this, write a controller that return "forward:/index.html" so that Angular can load index.html
         response.sendRedirect(redirectUrl);

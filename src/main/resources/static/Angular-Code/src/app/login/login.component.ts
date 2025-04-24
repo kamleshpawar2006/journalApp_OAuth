@@ -18,8 +18,9 @@ export class LoginComponent {
     
     const params = new URLSearchParams(window.location.search);
     const token = params.get('token');
+    const refresh = params.get('refresh');
     if(token) {
-      this.jwtService.setToken(token);
+      this.jwtService.setToken(token, refresh);
       this.router.navigate(['/dashboard']);
     } else {
       this.jwtService.validateToken().pipe(

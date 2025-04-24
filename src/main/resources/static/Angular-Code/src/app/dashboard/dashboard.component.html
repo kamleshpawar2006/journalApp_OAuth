@@ -1,0 +1,8 @@
+<button (click)="getJournals()">Get Journals</button>
+
+<table border="1" *ngIf="allJournals.length > 0">
+    <tr *ngFor="let item of allJournals">
+        <td>{{item?.title}}</td>
+        <td>{{item?.content}}</td>
+    </tr>
+</table>

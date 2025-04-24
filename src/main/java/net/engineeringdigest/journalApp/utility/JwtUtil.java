@@ -27,24 +27,25 @@ public class JwtUtil {
         claims.put("roles", userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList()));
-
-        return createToken(claims, userDetails.getUsername());
+        claims.put("tokenType", "ACCESS");
+        return createToken(claims, userDetails.getUsername(), 1000 * 60 * 15); // 15 minutes
     }
 
-//    public String generateToken(String userName) {
-//        Map<String, Object> claims = new HashMap<>();
-//        return createToken(claims, userName);
-//    }
+    public String generateRefreshToken(String userName) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("tokenType", "REFRESH");
+        return createToken(claims, userName, 1000 * 60 * 30); // 30 minutes
+    }
 
-    private String createToken(Map<String, Object> claims, String userName) {
+    private String createToken(Map<String, Object> claims, String userName, long expirationMillis) {
         return Jwts.builder()
                 .claims(claims)
                 .subject(userName)
-                .header().empty().add("type", "JWT")
+                .header().add("type", "JWT")
                 .and()
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 )) // 1 Hr
-                .signWith(Keys.hmacShaKeyFor(SECRET_KEY.getBytes()), SignatureAlgorithm.HS512)
+                .expiration(new Date(System.currentTimeMillis() + expirationMillis))
+                .signWith(getSigningKey(), SignatureAlgorithm.HS512)
                 .compact();
     }
 
@@ -56,6 +57,10 @@ public class JwtUtil {
         return extractAllClaims(jwt).getSubject();
     }
 
+    public String extractTokenType(String jwt) {
+        return (String) extractAllClaims(jwt).get("tokenType");
+    }
+
     private Date extractExpiration(String jwt) {
         return extractAllClaims(jwt).getExpiration();
     }
@@ -64,7 +69,7 @@ public class JwtUtil {
         return extractExpiration(jwt).before(new Date());
     }
 
-    private Claims extractAllClaims(String jwt) {
+    public Claims extractAllClaims(String jwt) {
         return Jwts.parser()
                 .setSigningKey(getSigningKey())
                 .build()
@@ -73,12 +78,7 @@ public class JwtUtil {
     }
 
     public List<String> extractRoles(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(SECRET_KEY.getBytes())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-
+        Claims claims = extractAllClaims(token);
         return (List<String>) claims.get("roles");
     }
 

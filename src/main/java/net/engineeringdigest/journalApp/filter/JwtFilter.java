@@ -1,5 +1,6 @@
 package net.engineeringdigest.journalApp.filter;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import net.engineeringdigest.journalApp.service.UserDetailsImpl;
@@ -10,7 +11,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -33,35 +33,37 @@ public class JwtFilter extends OncePerRequestFilter {
     @Autowired
     UserDetailsImpl userDetailsImpl;
 
+    // Skip filtering for refresh token endpoint
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getRequestURI();
+        return path.contains("/user-registration/refresh-token");
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException, ExpiredJwtException, UsernameNotFoundException {
         String authorizationHeader = request.getHeader("Authorization");
+
         try {
-            if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
                 String jwt = authorizationHeader.substring(7);
-                String userName = null;
-                try {
-                    userName = jwtUtil.extractUsername(jwt);
-                } catch (ExpiredJwtException ex) {
-                    log.error(ex.getMessage());
-                    throw new ExpiredJwtException(ex.getHeader(), ex.getClaims(),ex.getMessage());
+
+                Claims claims = jwtUtil.extractAllClaims(jwt);
+                String tokenType = (String) claims.get("tokenType");
+
+                // Only allow ACCESS tokens for regular API requests
+                if (!"ACCESS".equals(tokenType)) {
+                    throw new SecurityException("Token is not an access token");
                 }
 
-                UserDetails userDetails;
-                try {
-                    userDetails = userDetailsImpl.loadUserByUsername(userName);
-                } catch (UsernameNotFoundException ex) {
-                    log.error(ex.getMessage());
-                    throw new UsernameNotFoundException(ex.getMessage());
-                }
+                String userName = jwtUtil.extractUsername(jwt);
+                UserDetails userDetails = userDetailsImpl.loadUserByUsername(userName);
 
-                List<String> roles = jwtUtil.extractRoles(jwt);
-
-                List<SimpleGrantedAuthority> authorities = roles.stream()
+                List<SimpleGrantedAuthority> authorities = jwtUtil.extractRoles(jwt).stream()
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
 
-                if(!jwtUtil.isTokenExpired(jwt)) {
+                if (!jwtUtil.isTokenExpired(jwt)) {
                     UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
                     auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     response.addHeader("hi", "test header text");
