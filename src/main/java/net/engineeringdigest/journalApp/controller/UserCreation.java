@@ -56,6 +56,8 @@ public class UserCreation {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserEntity userInDB = userService.findByUserName(authentication.getName());
             if(userInDB != null) {
+                response.put("name", userInDB.getName());
+                response.put("email", userInDB.getEmail());
                 response.put("profileImage", userInDB.getProfilePicture());
                 response.put("status", "Valid Token");
             } else {
