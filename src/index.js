@@ -2,12 +2,12 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 
-const sourceFolder = '../';
+const sourceFolder = './main';
 const mergedOutputFile = './kamlesh/all-code-merged.txt';
 const recreateOutputFolder = './kamlesh/restored';
 const excludedFiles = ['package-lock.json', '.DS_Store'];
 const outputFile = './kamlesh/file-list.txt';
-const excludedDirs = ['Angular-Code', 'target', '.git', 'kamlesh', 'mvnw.cmd', 'mvnw', 'logs', '.mvn', '.idea', '.gitignore'];
+const excludedDirs = ['repositories', 'resources' ,'service', 'entity' , 'Angular-Code', 'target', '.git', 'kamlesh', 'mvnw.cmd', 'mvnw', 'logs', '.mvn', '.idea', '.gitignore'];
 
 function getAllFilesRecursively(dir) {
   let results = [];

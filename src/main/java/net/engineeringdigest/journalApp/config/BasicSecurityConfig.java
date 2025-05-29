@@ -3,59 +3,57 @@ package net.engineeringdigest.journalApp.config;
 import net.engineeringdigest.journalApp.filter.JwtFilter;
 import net.engineeringdigest.journalApp.security.OAuth2LoginSuccessHandler;
 import net.engineeringdigest.journalApp.service.UserDetailsImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableWebSecurity
-public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
+public class BasicSecurityConfig {
 
-    @Autowired
-    private UserDetailsImpl userDetailsImpl;
+    private final UserDetailsImpl userDetailsImpl;
+    private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
+    private final JwtFilter jwtFilter;
 
-    @Autowired
-    private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
+    public BasicSecurityConfig(UserDetailsImpl userDetailsImpl, OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler, JwtFilter jwtFilter) {
+        this.userDetailsImpl = userDetailsImpl;
+        this.oAuth2LoginSuccessHandler = oAuth2LoginSuccessHandler;
+        this.jwtFilter = jwtFilter;
+    }
 
-    @Autowired
-    private JwtFilter jwtFilter;
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/journal/**", "/user/**").authenticated()
-                .anyRequest().permitAll()
-                .and()
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(cors -> {})
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/journal/**", "/user/**").authenticated()
+                        .anyRequest().permitAll()
+                )
                 .oauth2Login(oauth -> oauth
                         .loginPage("/login")
                         .successHandler(oAuth2LoginSuccessHandler)
+                )
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(org.springframework.security.config.http.SessionCreationPolicy.STATELESS)
                 );
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().csrf().disable().cors();
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsImpl).passwordEncoder(passwordEncoderFun());
+        return http.build();
     }
 
     @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoderFun() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
     }
 }

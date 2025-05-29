@@ -39,12 +39,11 @@ public class JwtUtil {
 
     private String createToken(Map<String, Object> claims, String userName, long expirationMillis) {
         return Jwts.builder()
-                .claims(claims)
-                .subject(userName)
-                .header().add("type", "JWT")
-                .and()
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + expirationMillis))
+                .setClaims(claims)
+                .setSubject(userName)
+                .setHeaderParam("typ", "JWT")
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + expirationMillis))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS512)
                 .compact();
     }
@@ -70,11 +69,11 @@ public class JwtUtil {
     }
 
     public Claims extractAllClaims(String jwt) {
-        return Jwts.parser()
+        return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
                 .build()
-                .parseSignedClaims(jwt)
-                .getPayload();
+                .parseClaimsJws(jwt)
+                .getBody();
     }
 
     public List<String> extractRoles(String token) {
