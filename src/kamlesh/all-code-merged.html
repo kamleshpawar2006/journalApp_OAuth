@@ -1,5 +1,20 @@
---- START: ..\.gitignore ---
-HELP.md
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>All Extracted Code</title>
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
+    <style>
+      body { font-family: Arial, sans-serif; background: #1e1e1e; color: #eee; padding: 20px; }
+      h2 { color: #61dafb; border-bottom: 1px solid #444; padding-bottom: 5px; }
+      pre { margin: 10px 0; border-radius: 6px; }
+    </style>
+  </head>
+  <body>
+  <h1>Extracted Code Files</h1>
+  <h2>..\.gitignore</h2>
+<pre><code class="language-clike">HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -33,11 +48,9 @@ build/
 
 ### VS Code ###
 .vscode/
-
---- END: ..\.gitignore ---
-
---- START: ..\mvnw ---
-#!/bin/sh
+</code></pre>
+<h2>..\mvnw</h2>
+<pre><code class="language-clike">#!/bin/sh
 # ----------------------------------------------------------------------------
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
@@ -122,8 +135,8 @@ if [ -z "$M2_HOME" ] ; then
   # need this for relative symlinks
   while [ -h "$PRG" ] ; do
     ls=`ls -ld "$PRG"`
-    link=`expr "$ls" : '.*-> \(.*\)$'`
-    if expr "$link" : '/.*' > /dev/null; then
+    link=`expr "$ls" : '.*-&gt; \(.*\)$'`
+    if expr "$link" : '/.*' &gt; /dev/null; then
       PRG="$link"
     else
       PRG="`dirname "$PRG"`/$link"
@@ -135,7 +148,7 @@ if [ -z "$M2_HOME" ] ; then
   M2_HOME=`dirname "$PRG"`/..
 
   # make it fully qualified
-  M2_HOME=`cd "$M2_HOME" && pwd`
+  M2_HOME=`cd "$M2_HOME" &amp;&amp; pwd`
 
   cd "$saveddir"
   # echo Using m2 at $M2_HOME
@@ -143,31 +156,31 @@ fi
 
 # For Cygwin, ensure paths are in UNIX format before anything is touched
 if $cygwin ; then
-  [ -n "$M2_HOME" ] &&
+  [ -n "$M2_HOME" ] &amp;&amp;
     M2_HOME=`cygpath --unix "$M2_HOME"`
-  [ -n "$JAVA_HOME" ] &&
+  [ -n "$JAVA_HOME" ] &amp;&amp;
     JAVA_HOME=`cygpath --unix "$JAVA_HOME"`
-  [ -n "$CLASSPATH" ] &&
+  [ -n "$CLASSPATH" ] &amp;&amp;
     CLASSPATH=`cygpath --path --unix "$CLASSPATH"`
 fi
 
 # For Mingw, ensure paths are in UNIX format before anything is touched
 if $mingw ; then
-  [ -n "$M2_HOME" ] &&
+  [ -n "$M2_HOME" ] &amp;&amp;
     M2_HOME="`(cd "$M2_HOME"; pwd)`"
-  [ -n "$JAVA_HOME" ] &&
+  [ -n "$JAVA_HOME" ] &amp;&amp;
     JAVA_HOME="`(cd "$JAVA_HOME"; pwd)`"
 fi
 
 if [ -z "$JAVA_HOME" ]; then
   javaExecutable="`which javac`"
-  if [ -n "$javaExecutable" ] && ! [ "`expr \"$javaExecutable\" : '\([^ ]*\)'`" = "no" ]; then
+  if [ -n "$javaExecutable" ] &amp;&amp; ! [ "`expr \"$javaExecutable\" : '\([^ ]*\)'`" = "no" ]; then
     # readlink(1) is not available as standard on Solaris 10.
     readLink=`which readlink`
     if [ ! `expr "$readLink" : '\([^ ]*\)'` = "no" ]; then
       if $darwin ; then
         javaHome="`dirname \"$javaExecutable\"`"
-        javaExecutable="`cd \"$javaHome\" && pwd -P`/javac"
+        javaExecutable="`cd \"$javaHome\" &amp;&amp; pwd -P`/javac"
       else
         javaExecutable="`readlink -f \"$javaExecutable\"`"
       fi
@@ -193,8 +206,8 @@ if [ -z "$JAVACMD" ] ; then
 fi
 
 if [ ! -x "$JAVACMD" ] ; then
-  echo "Error: JAVA_HOME is not defined correctly." >&2
-  echo "  We cannot execute $JAVACMD" >&2
+  echo "Error: JAVA_HOME is not defined correctly." &gt;&amp;2
+  echo "  We cannot execute $JAVACMD" &gt;&amp;2
   exit 1
 fi
 
@@ -233,7 +246,7 @@ find_maven_basedir() {
 # concatenates all lines of a file
 concat_lines() {
   if [ -f "$1" ]; then
-    echo "$(tr -s '\n' ' ' < "$1")"
+    echo "$(tr -s '\n' ' ' &lt; "$1")"
   fi
 }
 
@@ -262,7 +275,7 @@ else
     while IFS="=" read key value; do
       case "$key" in (wrapperUrl) jarUrl="$value"; break ;;
       esac
-    done < "$BASE_DIR/.mvn/wrapper/maven-wrapper.properties"
+    done &lt; "$BASE_DIR/.mvn/wrapper/maven-wrapper.properties"
     if [ "$MVNW_VERBOSE" = true ]; then
       echo "Downloading from: $jarUrl"
     fi
@@ -271,7 +284,7 @@ else
       wrapperJarPath=`cygpath --path --windows "$wrapperJarPath"`
     fi
 
-    if command -v wget > /dev/null; then
+    if command -v wget &gt; /dev/null; then
         if [ "$MVNW_VERBOSE" = true ]; then
           echo "Found wget ... using wget"
         fi
@@ -280,7 +293,7 @@ else
         else
             wget --http-user=$MVNW_USERNAME --http-password=$MVNW_PASSWORD "$jarUrl" -O "$wrapperJarPath" || rm -f "$wrapperJarPath"
         fi
-    elif command -v curl > /dev/null; then
+    elif command -v curl &gt; /dev/null; then
         if [ "$MVNW_VERBOSE" = true ]; then
           echo "Found curl ... using curl"
         fi
@@ -329,13 +342,13 @@ MAVEN_OPTS="$(concat_lines "$MAVEN_PROJECTBASEDIR/.mvn/jvm.config") $MAVEN_OPTS"
 
 # For Cygwin, switch paths to Windows format before running java
 if $cygwin; then
-  [ -n "$M2_HOME" ] &&
+  [ -n "$M2_HOME" ] &amp;&amp;
     M2_HOME=`cygpath --path --windows "$M2_HOME"`
-  [ -n "$JAVA_HOME" ] &&
+  [ -n "$JAVA_HOME" ] &amp;&amp;
     JAVA_HOME=`cygpath --path --windows "$JAVA_HOME"`
-  [ -n "$CLASSPATH" ] &&
+  [ -n "$CLASSPATH" ] &amp;&amp;
     CLASSPATH=`cygpath --path --windows "$CLASSPATH"`
-  [ -n "$MAVEN_PROJECTBASEDIR" ] &&
+  [ -n "$MAVEN_PROJECTBASEDIR" ] &amp;&amp;
     MAVEN_PROJECTBASEDIR=`cygpath --path --windows "$MAVEN_PROJECTBASEDIR"`
 fi
 
@@ -353,11 +366,9 @@ exec "$JAVACMD" \
   "-Dmaven.home=${M2_HOME}" \
   "-Dmaven.multiModuleProjectDirectory=${MAVEN_PROJECTBASEDIR}" \
   ${WRAPPER_LAUNCHER} $MAVEN_CONFIG "$@"
-
---- END: ..\mvnw ---
-
---- START: ..\mvnw.cmd ---
-@REM ----------------------------------------------------------------------------
+</code></pre>
+<h2>..\mvnw.cmd</h2>
+<pre><code class="language-clike">@REM ----------------------------------------------------------------------------
 @REM Licensed to the Apache Software Foundation (ASF) under one
 @REM or more contributor license agreements.  See the NOTICE file
 @REM distributed with this work for additional information
@@ -420,9 +431,9 @@ set ERROR_CODE=0
 if not "%JAVA_HOME%" == "" goto OkJHome
 
 echo.
-echo Error: JAVA_HOME not found in your environment. >&2
-echo Please set the JAVA_HOME variable in your environment to match the >&2
-echo location of your Java installation. >&2
+echo Error: JAVA_HOME not found in your environment. &gt;&amp;2
+echo Please set the JAVA_HOME variable in your environment to match the &gt;&amp;2
+echo location of your Java installation. &gt;&amp;2
 echo.
 goto error
 
@@ -430,10 +441,10 @@ goto error
 if exist "%JAVA_HOME%\bin\java.exe" goto init
 
 echo.
-echo Error: JAVA_HOME is set to an invalid directory. >&2
-echo JAVA_HOME = "%JAVA_HOME%" >&2
-echo Please set the JAVA_HOME variable in your environment to match the >&2
-echo location of your Java installation. >&2
+echo Error: JAVA_HOME is set to an invalid directory. &gt;&amp;2
+echo JAVA_HOME = "%JAVA_HOME%" &gt;&amp;2
+echo Please set the JAVA_HOME variable in your environment to match the &gt;&amp;2
+echo location of your Java installation. &gt;&amp;2
 echo.
 goto error
 
@@ -471,7 +482,7 @@ IF NOT EXIST "%MAVEN_PROJECTBASEDIR%\.mvn\jvm.config" goto endReadAdditionalConf
 
 @setlocal EnableExtensions EnableDelayedExpansion
 for /F "usebackq delims=" %%a in ("%MAVEN_PROJECTBASEDIR%\.mvn\jvm.config") do set JVM_CONFIG_MAVEN_PROPS=!JVM_CONFIG_MAVEN_PROPS! %%a
-@endlocal & set JVM_CONFIG_MAVEN_PROPS=%JVM_CONFIG_MAVEN_PROPS%
+@endlocal &amp; set JVM_CONFIG_MAVEN_PROPS=%JVM_CONFIG_MAVEN_PROPS%
 
 :endReadAdditionalConfig
 
@@ -500,7 +511,7 @@ if exist %WRAPPER_JAR% (
         echo Downloading from: %DOWNLOAD_URL%
     )
 
-    powershell -Command "&{"^
+    powershell -Command "&amp;{"^
 		"$webclient = new-object System.Net.WebClient;"^
 		"if (-not ([string]::IsNullOrEmpty('%MVNW_USERNAME%') -and [string]::IsNullOrEmpty('%MVNW_PASSWORD%'))) {"^
 		"$webclient.Credentials = new-object System.Net.NetworkCredential('%MVNW_USERNAME%', '%MVNW_PASSWORD%');"^
@@ -531,7 +542,7 @@ goto end
 set ERROR_CODE=1
 
 :end
-@endlocal & set ERROR_CODE=%ERROR_CODE%
+@endlocal &amp; set ERROR_CODE=%ERROR_CODE%
 
 if not "%MAVEN_SKIP_RC%"=="" goto skipRcPost
 @REM check for post script, once with legacy .bat ending and once with .cmd ending
@@ -545,137 +556,133 @@ if "%MAVEN_BATCH_PAUSE%"=="on" pause
 if "%MAVEN_TERMINATE_CMD%"=="on" exit %ERROR_CODE%
 
 cmd /C exit /B %ERROR_CODE%
-
---- END: ..\mvnw.cmd ---
-
---- START: ..\pom.xml ---
-<project xmlns="http://maven.apache.org/POM/4.0.0"
+</code></pre>
+<h2>..\pom.xml</h2>
+<pre><code class="language-markup">&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
 
-	<groupId>net.engineeringdigest</groupId>
-	<artifactId>journalApp</artifactId>
-	<version>1.0.0</version>
-	<packaging>jar</packaging>
+	&lt;groupId&gt;net.engineeringdigest&lt;/groupId&gt;
+	&lt;artifactId&gt;journalApp&lt;/artifactId&gt;
+	&lt;version&gt;1.0.0&lt;/version&gt;
+	&lt;packaging&gt;jar&lt;/packaging&gt;
 
-	<name>journalApp</name>
-	<description>Spring Boot 3.5.0 Journal App</description>
+	&lt;name&gt;journalApp&lt;/name&gt;
+	&lt;description&gt;Spring Boot 3.5.0 Journal App&lt;/description&gt;
 
-	<!-- ✅ Use hardcoded version here (Maven requirement) -->
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.0</version>
-		<relativePath/> <!-- Lookup from repository -->
-	</parent>
+	&lt;!-- ✅ Use hardcoded version here (Maven requirement) --&gt;
+	&lt;parent&gt;
+		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+		&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+		&lt;version&gt;3.5.0&lt;/version&gt;
+		&lt;relativePath/&gt; &lt;!-- Lookup from repository --&gt;
+	&lt;/parent&gt;
 
-	<properties>
-		<java.version>17</java.version>
-		<jjwt.version>0.11.5</jjwt.version>
-	</properties>
+	&lt;properties&gt;
+		&lt;java.version&gt;17&lt;/java.version&gt;
+		&lt;jjwt.version&gt;0.11.5&lt;/jjwt.version&gt;
+	&lt;/properties&gt;
 
-	<dependencies>
+	&lt;dependencies&gt;
 
-		<!-- Spring Boot Core -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+		&lt;!-- Spring Boot Core --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+		&lt;/dependency&gt;
 
-		<!-- Spring Security -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+		&lt;!-- Spring Security --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
+		&lt;/dependency&gt;
 
-		<!-- OAuth2 Client -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-oauth2-client</artifactId>
-		</dependency>
+		&lt;!-- OAuth2 Client --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-oauth2-client&lt;/artifactId&gt;
+		&lt;/dependency&gt;
 
-		<!-- JWT -->
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-api</artifactId>
-			<version>${jjwt.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-impl</artifactId>
-			<version>${jjwt.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-jackson</artifactId>
-			<version>${jjwt.version}</version>
-			<scope>runtime</scope>
-		</dependency>
+		&lt;!-- JWT --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;io.jsonwebtoken&lt;/groupId&gt;
+			&lt;artifactId&gt;jjwt-api&lt;/artifactId&gt;
+			&lt;version&gt;${jjwt.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;io.jsonwebtoken&lt;/groupId&gt;
+			&lt;artifactId&gt;jjwt-impl&lt;/artifactId&gt;
+			&lt;version&gt;${jjwt.version}&lt;/version&gt;
+			&lt;scope&gt;runtime&lt;/scope&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;io.jsonwebtoken&lt;/groupId&gt;
+			&lt;artifactId&gt;jjwt-jackson&lt;/artifactId&gt;
+			&lt;version&gt;${jjwt.version}&lt;/version&gt;
+			&lt;scope&gt;runtime&lt;/scope&gt;
+		&lt;/dependency&gt;
 
-		<!-- Spring Data JPA -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
+		&lt;!-- Spring Data JPA --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+		&lt;/dependency&gt;
 
-		<!-- MySQL Connector -->
-		<dependency>
-			<groupId>com.mysql</groupId>
-			<artifactId>mysql-connector-j</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+		&lt;!-- MySQL Connector --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;com.mysql&lt;/groupId&gt;
+			&lt;artifactId&gt;mysql-connector-j&lt;/artifactId&gt;
+			&lt;scope&gt;runtime&lt;/scope&gt;
+		&lt;/dependency&gt;
 
-		<!-- Lombok -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
+		&lt;!-- Lombok --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+			&lt;artifactId&gt;lombok&lt;/artifactId&gt;
+			&lt;optional&gt;true&lt;/optional&gt;
+		&lt;/dependency&gt;
 
-		<!-- Jakarta Servlet API (for compatibility with Spring Boot 3) -->
-		<dependency>
-			<groupId>jakarta.servlet</groupId>
-			<artifactId>jakarta.servlet-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
+		&lt;!-- Jakarta Servlet API (for compatibility with Spring Boot 3) --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;jakarta.servlet&lt;/groupId&gt;
+			&lt;artifactId&gt;jakarta.servlet-api&lt;/artifactId&gt;
+			&lt;scope&gt;provided&lt;/scope&gt;
+		&lt;/dependency&gt;
 
-		<!-- Jakarta Validation API -->
-		<dependency>
-			<groupId>jakarta.validation</groupId>
-			<artifactId>jakarta.validation-api</artifactId>
-		</dependency>
+		&lt;!-- Jakarta Validation API --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;jakarta.validation&lt;/groupId&gt;
+			&lt;artifactId&gt;jakarta.validation-api&lt;/artifactId&gt;
+		&lt;/dependency&gt;
 
-		<!-- Logging (optional, already included in spring-boot-starter) -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-logging</artifactId>
-		</dependency>
+		&lt;!-- Logging (optional, already included in spring-boot-starter) --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;
+		&lt;/dependency&gt;
 
-		<!-- Testing -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+		&lt;!-- Testing --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+			&lt;scope&gt;test&lt;/scope&gt;
+		&lt;/dependency&gt;
 
-	</dependencies>
+	&lt;/dependencies&gt;
 
-	<build>
-		<plugins>
-			<!-- Spring Boot Plugin -->
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-</project>
---- END: ..\pom.xml ---
-
---- START: index.js ---
-const fs = require('fs');
+	&lt;build&gt;
+		&lt;plugins&gt;
+			&lt;!-- Spring Boot Plugin --&gt;
+			&lt;plugin&gt;
+				&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+				&lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+			&lt;/plugin&gt;
+		&lt;/plugins&gt;
+	&lt;/build&gt;
+&lt;/project&gt;</code></pre>
+<h2>index.js</h2>
+<pre><code class="language-javascript">const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 
@@ -712,7 +719,7 @@ function extractCodeFromFilesToSingleFile(filePaths = null) {
   const files = filePaths || getAllFilesRecursively(sourceFolder);
   let output = '';
 
-  files.forEach(filePath => {
+  files.forEach(filePath =&gt; {
     const content = fs.readFileSync(filePath, 'utf8');
     const relativePath = path.relative('.', filePath);
 
@@ -738,23 +745,23 @@ function extractCodeFromFilesToSingleFile(filePaths = null) {
 
     // HTML header with Prism.js and theme
     let outputHtml = `
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>All Extracted Code</title>
-    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
-    <style>
+  &lt;!DOCTYPE html&gt;
+  &lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;All Extracted Code&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/&gt;
+    &lt;style&gt;
       body { font-family: Arial, sans-serif; background: #1e1e1e; color: #eee; padding: 20px; }
       h2 { color: #61dafb; border-bottom: 1px solid #444; padding-bottom: 5px; }
       pre { margin: 10px 0; border-radius: 6px; }
-    </style>
-  </head>
-  <body>
-  <h1>Extracted Code Files</h1>
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;h1&gt;Extracted Code Files&lt;/h1&gt;
   `;
 
-    files.forEach(filePath => {
+    files.forEach(filePath =&gt; {
       const content = fs.readFileSync(filePath, 'utf8');
       const relativePath = path.relative('.', filePath);
       const ext = path.extname(filePath).toLowerCase();
@@ -762,23 +769,23 @@ function extractCodeFromFilesToSingleFile(filePaths = null) {
 
       outputText += `--- START: ${relativePath} ---\n${content}\n--- END: ${relativePath} ---\n\n`;
 
-      outputHtml += `<h2>${relativePath}</h2>\n`;
-      outputHtml += `<pre><code class="language-${lang}">${escapeHtml(content)}</code></pre>\n`;
+      outputHtml += `&lt;h2&gt;${relativePath}&lt;/h2&gt;\n`;
+      outputHtml += `&lt;pre&gt;&lt;code class="language-${lang}"&gt;${escapeHtml(content)}&lt;/code&gt;&lt;/pre&gt;\n`;
 
       console.log(`Extracted: ${relativePath}`);
     });
 
     outputHtml += `
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-tsx.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-properties.min.js"></script>
-    </body>
-    </html>
+    &lt;script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-tsx.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-properties.min.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
     `;
 
 
@@ -797,34 +804,34 @@ function extractCodeFromFilesToSingleFile(filePaths = null) {
     const files = filePaths || getAllFilesRecursively(sourceFolder);
     let outputText = '';
     let outputHtml = `
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>All Extracted Code</title>
-    <style>
+  &lt;!DOCTYPE html&gt;
+  &lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;All Extracted Code&lt;/title&gt;
+    &lt;style&gt;
       body { font-family: Arial, sans-serif; background: #f9f9f9; padding: 20px; }
       h2 { background: #333; color: #fff; padding: 10px; }
       pre { background: #eee; padding: 15px; overflow-x: auto; border-left: 5px solid #333; }
       code { white-space: pre-wrap; font-family: Consolas, monospace; }
-    </style>
-  </head>
-  <body>
-  <h1>Extracted Code Files</h1>
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;h1&gt;Extracted Code Files&lt;/h1&gt;
   `;
 
-    files.forEach(filePath => {
+    files.forEach(filePath =&gt; {
       const content = fs.readFileSync(filePath, 'utf8');
       const relativePath = path.relative('.', filePath);
 
       outputText += `--- START: ${relativePath} ---\n${content}\n--- END: ${relativePath} ---\n\n`;
 
-      outputHtml += `<h2>${relativePath}</h2>\n<pre><code>${escapeHtml(content)}</code></pre>\n`;
+      outputHtml += `&lt;h2&gt;${relativePath}&lt;/h2&gt;\n&lt;pre&gt;&lt;code&gt;${escapeHtml(content)}&lt;/code&gt;&lt;/pre&gt;\n`;
 
       console.log(`Extracted: ${relativePath}`);
     });
 
-    outputHtml += `</body></html>`;
+    outputHtml += `&lt;/body&gt;&lt;/html&gt;`;
 
     fs.writeFileSync(mergedOutputFile, outputText, 'utf8');
     fs.writeFileSync(mergedHtmlOutputFile, outputHtml, 'utf8');
@@ -859,16 +866,16 @@ function extractCodeFromFilesToSingleFile(filePaths = null) {
 
   function escapeHtml(str) {
     return str
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
+      .replace(/&amp;/g, '&amp;amp;')
+      .replace(/&lt;/g, '&amp;lt;')
+      .replace(/&gt;/g, '&amp;gt;');
   }
 
 function recreateFilesFromMergedFile() {
   const content = fs.readFileSync(mergedOutputFile, 'utf8');
   const fileBlocks = content.split(/--- START: (.*?) ---\n([\s\S]*?)--- END: \1 ---/g);
 
-  for (let i = 1; i < fileBlocks.length; i += 3) {
+  for (let i = 1; i &lt; fileBlocks.length; i += 3) {
     const filePath = fileBlocks[i].trim();
     const fileContent = fileBlocks[i + 1];
 
@@ -891,7 +898,7 @@ function recreateFilesFromMergedFile() {
 function logAllFileNames(dir, allFiles = []) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
 
-  entries.forEach(entry => {
+  entries.forEach(entry =&gt; {
     const fullPath = path.join(dir, entry.name);
 
     if (entry.isDirectory()) {
@@ -917,7 +924,7 @@ function generateFileList() {
 
   // Log to console
   console.log(`Saved ${files.length} file paths to ${outputFile}`);
-  files.forEach(file => console.log(file));
+  files.forEach(file =&gt; console.log(file));
 }
 
 // extractCodeFromFilesToSingleFile([
@@ -953,7 +960,7 @@ console.log("2 - Recreate files from the merged file");
 console.log("3 - Generate a file list");
 console.log("4 - Exit");
 
-rl.question("\nEnter the number of the action you want to perform: ", (answer) => {
+rl.question("\nEnter the number of the action you want to perform: ", (answer) =&gt; {
   switch (answer.trim()) {
     case '1':
       extractCodeFromFilesToSingleFile();
@@ -971,11 +978,9 @@ rl.question("\nEnter the number of the action you want to perform: ", (answer) =
       console.log("Invalid choice. Please enter a valid number.");
   }
   rl.close();
-});
---- END: index.js ---
-
---- START: main\java\net\engineeringdigest\journalApp\config\BasicSecurityConfig.java ---
-package net.engineeringdigest.journalApp.config;
+});</code></pre>
+<h2>main\java\net\engineeringdigest\journalApp\config\BasicSecurityConfig.java</h2>
+<pre><code class="language-java">package net.engineeringdigest.journalApp.config;
 
 import net.engineeringdigest.journalApp.filter.JwtFilter;
 import net.engineeringdigest.journalApp.security.OAuth2LoginSuccessHandler;
@@ -1008,17 +1013,17 @@ public class BasicSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(cors -> {})
-                .authorizeHttpRequests(auth -> auth
+                .cors(cors -&gt; {})
+                .authorizeHttpRequests(auth -&gt; auth
                         .requestMatchers("/journal/**", "/user/**").authenticated()
                         .anyRequest().permitAll()
                 )
-                .oauth2Login(oauth -> oauth
+                .oauth2Login(oauth -&gt; oauth
                         .loginPage("/login")
                         .successHandler(oAuth2LoginSuccessHandler)
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .sessionManagement(session -> session
+                .sessionManagement(session -&gt; session
                         .sessionCreationPolicy(org.springframework.security.config.http.SessionCreationPolicy.STATELESS)
                 );
         return http.build();
@@ -1034,11 +1039,9 @@ public class BasicSecurityConfig {
         return config.getAuthenticationManager();
     }
 }
-
---- END: main\java\net\engineeringdigest\journalApp\config\BasicSecurityConfig.java ---
-
---- START: main\java\net\engineeringdigest\journalApp\config\DatabaseChecker.java ---
-package net.engineeringdigest.journalApp.config;
+</code></pre>
+<h2>main\java\net\engineeringdigest\journalApp\config\DatabaseChecker.java</h2>
+<pre><code class="language-java">package net.engineeringdigest.journalApp.config;
 
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -1068,11 +1071,9 @@ public class DatabaseChecker {
     }
 }
 
-
---- END: main\java\net\engineeringdigest\journalApp\config\DatabaseChecker.java ---
-
---- START: main\java\net\engineeringdigest\journalApp\config\DataSourceConfig.java ---
-package net.engineeringdigest.journalApp.config;
+</code></pre>
+<h2>main\java\net\engineeringdigest\journalApp\config\DataSourceConfig.java</h2>
+<pre><code class="language-java">package net.engineeringdigest.journalApp.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -1097,11 +1098,9 @@ public class DataSourceConfig {
 
         return dataSource;
     }
-}
---- END: main\java\net\engineeringdigest\journalApp\config\DataSourceConfig.java ---
-
---- START: main\java\net\engineeringdigest\journalApp\config\GlobalCorsConfig.java ---
-package net.engineeringdigest.journalApp.config;
+}</code></pre>
+<h2>main\java\net\engineeringdigest\journalApp\config\GlobalCorsConfig.java</h2>
+<pre><code class="language-java">package net.engineeringdigest.journalApp.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -1127,11 +1126,9 @@ public class GlobalCorsConfig {
     }
 }
 
-
---- END: main\java\net\engineeringdigest\journalApp\config\GlobalCorsConfig.java ---
-
---- START: main\java\net\engineeringdigest\journalApp\controller\FrontendController.java ---
-//package net.engineeringdigest.journalApp;
+</code></pre>
+<h2>main\java\net\engineeringdigest\journalApp\controller\FrontendController.java</h2>
+<pre><code class="language-java">//package net.engineeringdigest.journalApp;
 //
 //import org.springframework.stereotype.Controller;
 //import org.springframework.web.bind.annotation.RequestMapping;
@@ -1148,11 +1145,9 @@ public class GlobalCorsConfig {
 //        return "forward:/index.html";
 //    }
 //
-//}
---- END: main\java\net\engineeringdigest\journalApp\controller\FrontendController.java ---
-
---- START: main\java\net\engineeringdigest\journalApp\controller\JournalController.java ---
-package net.engineeringdigest.journalApp.controller;
+//}</code></pre>
+<h2>main\java\net\engineeringdigest\journalApp\controller\JournalController.java</h2>
+<pre><code class="language-java">package net.engineeringdigest.journalApp.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import net.engineeringdigest.journalApp.entity.JournalEntity;
@@ -1183,33 +1178,33 @@ public class JournalController {
     @Autowired
     private UserService userService;
 
-    private List<JournalEntity> journalEntities = new ArrayList<>();
+    private List&lt;JournalEntity&gt; journalEntities = new ArrayList&lt;&gt;();
 
     @GetMapping
-    public ResponseEntity<List<JournalEntity>> journalEntries() {
-        return new ResponseEntity<>(journalService.getAllJournalEntries(), HttpStatus.OK);
+    public ResponseEntity&lt;List&lt;JournalEntity&gt;&gt; journalEntries() {
+        return new ResponseEntity&lt;&gt;(journalService.getAllJournalEntries(), HttpStatus.OK);
     }
 
     @GetMapping("/user")
-    public ResponseEntity<List<JournalEntity>> journalEntriesByUserName() {
+    public ResponseEntity&lt;List&lt;JournalEntity&gt;&gt; journalEntriesByUserName() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserEntity user = userService.findByUserName(authentication.getName());
-        List<Integer> journalEntriesIDs = user.getJournalEntries();
-        if(journalEntriesIDs != null && journalEntriesIDs.size() > 0) {
-            List<JournalEntity> journalEntities = journalService.getJournalEntriesByIDs(journalEntriesIDs);
-            return new ResponseEntity<>(journalEntities, HttpStatus.OK);
+        List&lt;Integer&gt; journalEntriesIDs = user.getJournalEntries();
+        if(journalEntriesIDs != null &amp;&amp; journalEntriesIDs.size() &gt; 0) {
+            List&lt;JournalEntity&gt; journalEntities = journalService.getJournalEntriesByIDs(journalEntriesIDs);
+            return new ResponseEntity&lt;&gt;(journalEntities, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);
         }
     }
 
     @GetMapping("/search")
-    public ResponseEntity<?> journalEntriesByCriteria(@RequestParam String criteria, @RequestParam String criteriaValue) {
-        List<JournalEntity> result;
+    public ResponseEntity&lt;?&gt; journalEntriesByCriteria(@RequestParam String criteria, @RequestParam String criteriaValue) {
+        List&lt;JournalEntity&gt; result;
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserEntity user = userService.findByUserName(authentication.getName());
-        List<Integer> journalEntriesIDs = user.getJournalEntries();
+        List&lt;Integer&gt; journalEntriesIDs = user.getJournalEntries();
 
         switch (criteria)  {
             case "id" : {
@@ -1218,10 +1213,10 @@ public class JournalController {
                     if(journalEntriesIDs.contains(journalId)) {
                         result = journalService.getJournalEntity(journalId);
                     } else {
-                        return new ResponseEntity<>("Unauthorised Journal Entry", HttpStatus.BAD_REQUEST);
+                        return new ResponseEntity&lt;&gt;("Unauthorised Journal Entry", HttpStatus.BAD_REQUEST);
                     }
                 } catch (NumberFormatException ex) {
-                    return new ResponseEntity<>("Invalid search value", HttpStatus.BAD_REQUEST);
+                    return new ResponseEntity&lt;&gt;("Invalid search value", HttpStatus.BAD_REQUEST);
                 }
                 break;
             }
@@ -1230,86 +1225,84 @@ public class JournalController {
                 break;
             }
             default: {
-                return new ResponseEntity<>("Invalid search criteria", HttpStatus.BAD_REQUEST);
+                return new ResponseEntity&lt;&gt;("Invalid search criteria", HttpStatus.BAD_REQUEST);
             }
         }
-        return new ResponseEntity<>(result, (!result.isEmpty()) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+        return new ResponseEntity&lt;&gt;(result, (!result.isEmpty()) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
-    public ResponseEntity<?> addJournal(@RequestBody JournalEntity journalEntity) {
+    public ResponseEntity&lt;?&gt; addJournal(@RequestBody JournalEntity journalEntity) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserEntity user = userService.findByUserName(authentication.getName());
         Integer insertedId;
         try {
             insertedId = journalService.save(journalEntity, user.getUserName());
             journalEntity.setId(insertedId);
-            return new ResponseEntity<>(journalEntity, HttpStatus.OK);
+            return new ResponseEntity&lt;&gt;(journalEntity, HttpStatus.OK);
         } catch (ResourceNotFoundException ex) {
-            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity&lt;&gt;(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
     @PostMapping("/save-all-journals")
-    public ResponseEntity<?> addAllJournal(@RequestBody List<JournalEntity> journalEntities) {
+    public ResponseEntity&lt;?&gt; addAllJournal(@RequestBody List&lt;JournalEntity&gt; journalEntities) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return new ResponseEntity<>(journalService.saveAll(journalEntities, authentication.getName()), HttpStatus.OK);
+        return new ResponseEntity&lt;&gt;(journalService.saveAll(journalEntities, authentication.getName()), HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<?> updateJournal(@RequestBody List<JournalEntity> journalEntityList) {
+    public ResponseEntity&lt;?&gt; updateJournal(@RequestBody List&lt;JournalEntity&gt; journalEntityList) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserEntity user = userService.findByUserName(authentication.getName());
-        if(authentication.getName() != null && journalEntityList.size() > 0) {
+        if(authentication.getName() != null &amp;&amp; journalEntityList.size() &gt; 0) {
             try {
-                List<Integer> journalEntriesIDs = user.getJournalEntries();
-                List<JournalEntity> authenticatedJournalList = journalEntityList.stream().filter(e -> journalEntriesIDs.contains(e.getId())).collect(Collectors.toList());
-                List<JournalEntity> unAuthenticatedJournalList = journalEntityList.stream().filter(e -> !journalEntriesIDs.contains(e.getId())).collect(Collectors.toList());
-                Map<String, List<Integer>> journalIDs = new HashMap<>();
+                List&lt;Integer&gt; journalEntriesIDs = user.getJournalEntries();
+                List&lt;JournalEntity&gt; authenticatedJournalList = journalEntityList.stream().filter(e -&gt; journalEntriesIDs.contains(e.getId())).collect(Collectors.toList());
+                List&lt;JournalEntity&gt; unAuthenticatedJournalList = journalEntityList.stream().filter(e -&gt; !journalEntriesIDs.contains(e.getId())).collect(Collectors.toList());
+                Map&lt;String, List&lt;Integer&gt;&gt; journalIDs = new HashMap&lt;&gt;();
 
-                if(authenticatedJournalList.size() > 0) {
-                    journalIDs.put("Authenticated Journal IDs", authenticatedJournalList.stream().map(e -> e.getId()).collect(Collectors.toList()));
+                if(authenticatedJournalList.size() &gt; 0) {
+                    journalIDs.put("Authenticated Journal IDs", authenticatedJournalList.stream().map(e -&gt; e.getId()).collect(Collectors.toList()));
                     journalService.updateAll(authenticatedJournalList);
                 }
-                if(unAuthenticatedJournalList.size() > 0) {
-                    journalIDs.put("Unauthenticated Journal IDs", unAuthenticatedJournalList.stream().map(e -> e.getId()).collect(Collectors.toList()));
+                if(unAuthenticatedJournalList.size() &gt; 0) {
+                    journalIDs.put("Unauthenticated Journal IDs", unAuthenticatedJournalList.stream().map(e -&gt; e.getId()).collect(Collectors.toList()));
                 }
-                return new ResponseEntity<>(journalIDs, HttpStatus.OK);
+                return new ResponseEntity&lt;&gt;(journalIDs, HttpStatus.OK);
             } catch (IllegalArgumentException ex) {
                 log.error(String.valueOf(ex));
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);
             } catch (Exception ex) {
                 log.error(String.valueOf(ex));
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);
             }
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteJournal(@PathVariable Integer id) {
+    public ResponseEntity&lt;?&gt; deleteJournal(@PathVariable Integer id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserEntity user = userService.findByUserName(authentication.getName());
-        List<Integer> journalEntriesIDs = user.getJournalEntries();
+        List&lt;Integer&gt; journalEntriesIDs = user.getJournalEntries();
         if(journalEntriesIDs.contains(id)) {
             try {
-                return new ResponseEntity<>(journalService.deleteJournal(id), HttpStatus.OK);
+                return new ResponseEntity&lt;&gt;(journalService.deleteJournal(id), HttpStatus.OK);
             } catch (RuntimeException ex) {
                 log.error(ex.getMessage());
-                return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+                return new ResponseEntity&lt;&gt;(ex.getMessage(), HttpStatus.BAD_REQUEST);
             }
         } else {
-            return new ResponseEntity<>("Journal not found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity&lt;&gt;("Journal not found", HttpStatus.NOT_FOUND);
         }
     }
 
 }
-
---- END: main\java\net\engineeringdigest\journalApp\controller\JournalController.java ---
-
---- START: main\java\net\engineeringdigest\journalApp\controller\UserController.java ---
-package net.engineeringdigest.journalApp.controller;
+</code></pre>
+<h2>main\java\net\engineeringdigest\journalApp\controller\UserController.java</h2>
+<pre><code class="language-java">package net.engineeringdigest.journalApp.controller;
 
 import lombok.RequiredArgsConstructor;
 import net.engineeringdigest.journalApp.entity.UserEntity;
@@ -1331,60 +1324,58 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<UserEntity>> getAllUsers() {
-        List<UserEntity> users = userService.getAll();
-        if(users.size() > 0) {
-            return new ResponseEntity<>(users, HttpStatus.OK);
+    public ResponseEntity&lt;List&lt;UserEntity&gt;&gt; getAllUsers() {
+        List&lt;UserEntity&gt; users = userService.getAll();
+        if(users.size() &gt; 0) {
+            return new ResponseEntity&lt;&gt;(users, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);
         }
     }
 
     @GetMapping("/{userName}")
-    public ResponseEntity<UserEntity> getUserByName(@PathVariable String userName) {
+    public ResponseEntity&lt;UserEntity&gt; getUserByName(@PathVariable String userName) {
         UserEntity user = userService.findByUserName(userName);
         if(user != null) {
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            return new ResponseEntity&lt;&gt;(user, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);
         }
     }
 
     @PutMapping
-    public ResponseEntity<HttpStatus> updateUser(@RequestBody UserEntity user) {
+    public ResponseEntity&lt;HttpStatus&gt; updateUser(@RequestBody UserEntity user) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserEntity userInDB = userService.findByUserName(authentication.getName());
         if(!userInDB.equals(null)) {
             userInDB.setPassword(user.getPassword());
             userService.saveUser(userInDB);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity&lt;&gt;(HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable Integer id) {
+    public ResponseEntity&lt;HttpStatus&gt; deleteUser(@PathVariable Integer id) {
         try {
             UserEntity user = userService.findById(id);
             if(!user.equals(null)) {
                 userService.deleteUser(id);
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity&lt;&gt;(HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);
             }
         } catch (Exception ex) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
 
 }
-
---- END: main\java\net\engineeringdigest\journalApp\controller\UserController.java ---
-
---- START: main\java\net\engineeringdigest\journalApp\controller\UserCreation.java ---
-package net.engineeringdigest.journalApp.controller;
+</code></pre>
+<h2>main\java\net\engineeringdigest\journalApp\controller\UserCreation.java</h2>
+<pre><code class="language-java">package net.engineeringdigest.journalApp.controller;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -1431,13 +1422,13 @@ public class UserCreation {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user) {
+    public ResponseEntity&lt;UserEntity&gt; createUser(@RequestBody UserEntity user) {
         return new ResponseEntity(userService.createUser(user), HttpStatus.OK);
     }
 
     @GetMapping("/validateJwt")
-    public ResponseEntity<?> validateJwt() {
-        Map<String, String> response = new HashMap<>();
+    public ResponseEntity&lt;?&gt; validateJwt() {
+        Map&lt;String, String&gt; response = new HashMap&lt;&gt;();
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserEntity userInDB = userService.findByUserName(authentication.getName());
@@ -1449,15 +1440,15 @@ public class UserCreation {
             } else {
                 response.put("status", "Invalid User");
             }
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);
         } catch (Exception ex) {
             response.put("status", "Invalid Token");
-            return new ResponseEntity<>(ex, HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity&lt;&gt;(ex, HttpStatus.UNAUTHORIZED);
         }
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody UserEntity user) {
+    public ResponseEntity&lt;?&gt; loginUser(@RequestBody UserEntity user) {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword())
@@ -1465,14 +1456,14 @@ public class UserCreation {
             UserEntity dbUser = userService.findByUserName(user.getUserName());
             UserDetails userDetails = userDetailsImpl.loadUserByUsername(user.getUserName());
             String jwt = jwtUtil.generateToken(userDetails, dbUser.getUserId());
-            return new ResponseEntity<>(jwt, HttpStatus.OK);
+            return new ResponseEntity&lt;&gt;(jwt, HttpStatus.OK);
         } catch (Exception ex) {
-            return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity&lt;&gt;(ex.getMessage(), HttpStatus.UNAUTHORIZED);
         }
     }
 
     @PostMapping("/refresh-token")
-    public ResponseEntity<?> refreshToken(@RequestHeader("Authorization") String authHeader) {
+    public ResponseEntity&lt;?&gt; refreshToken(@RequestHeader("Authorization") String authHeader) {
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Missing Authorization header");
         }
@@ -1485,10 +1476,10 @@ public class UserCreation {
             }
         } catch (ExpiredJwtException ex) {
             log.error(ex.getMessage());
-            return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity&lt;&gt;(ex.getMessage(), HttpStatus.UNAUTHORIZED);
         } catch (Exception ex) {
             log.error(ex.getMessage());
-            return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity&lt;&gt;(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         String tokenType = jwtUtil.extractTokenType(token);
@@ -1501,29 +1492,25 @@ public class UserCreation {
         String newAccessToken = jwtUtil.generateToken(userDetails, null);
         String newRefreshToken = jwtUtil.generateRefreshToken(username);
 
-        Map<String, String> tokens = new HashMap<>();
+        Map&lt;String, String&gt; tokens = new HashMap&lt;&gt;();
         tokens.put("accessToken", newAccessToken);
         tokens.put("refreshToken", newRefreshToken);
         return ResponseEntity.ok(tokens);
     }
 
 }
-
---- END: main\java\net\engineeringdigest\journalApp\controller\UserCreation.java ---
-
---- START: main\java\net\engineeringdigest\journalApp\exception\ResourceNotFoundException.java ---
-package net.engineeringdigest.journalApp.exception;
+</code></pre>
+<h2>main\java\net\engineeringdigest\journalApp\exception\ResourceNotFoundException.java</h2>
+<pre><code class="language-java">package net.engineeringdigest.journalApp.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {
         super(message);
     }
 }
-
---- END: main\java\net\engineeringdigest\journalApp\exception\ResourceNotFoundException.java ---
-
---- START: main\java\net\engineeringdigest\journalApp\filter\JwtFilter.java ---
-package net.engineeringdigest.journalApp.filter;
+</code></pre>
+<h2>main\java\net\engineeringdigest\journalApp\filter\JwtFilter.java</h2>
+<pre><code class="language-java">package net.engineeringdigest.journalApp.filter;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -1570,7 +1557,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String authorizationHeader = request.getHeader("Authorization");
 
         try {
-            if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            if (authorizationHeader != null &amp;&amp; authorizationHeader.startsWith("Bearer ")) {
                 String jwt = authorizationHeader.substring(7);
 
                 Claims claims = jwtUtil.extractAllClaims(jwt);
@@ -1584,7 +1571,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 String userName = jwtUtil.extractUsername(jwt);
                 UserDetails userDetails = userDetailsImpl.loadUserByUsername(userName);
 
-                List<SimpleGrantedAuthority> authorities = jwtUtil.extractRoles(jwt).stream()
+                List&lt;SimpleGrantedAuthority&gt; authorities = jwtUtil.extractRoles(jwt).stream()
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
 
@@ -1613,11 +1600,9 @@ public class JwtFilter extends OncePerRequestFilter {
     }
 
 }
-
---- END: main\java\net\engineeringdigest\journalApp\filter\JwtFilter.java ---
-
---- START: main\java\net\engineeringdigest\journalApp\JournalApplication.java ---
-package net.engineeringdigest.journalApp;
+</code></pre>
+<h2>main\java\net\engineeringdigest\journalApp\JournalApplication.java</h2>
+<pre><code class="language-java">package net.engineeringdigest.journalApp;
 
 
 import org.springframework.boot.SpringApplication;
@@ -1633,11 +1618,9 @@ public class JournalApplication {
     }
 
 
-}
---- END: main\java\net\engineeringdigest\journalApp\JournalApplication.java ---
-
---- START: main\java\net\engineeringdigest\journalApp\security\OAuth2LoginSuccessHandler.java ---
-package net.engineeringdigest.journalApp.security;
+}</code></pre>
+<h2>main\java\net\engineeringdigest\journalApp\security\OAuth2LoginSuccessHandler.java</h2>
+<pre><code class="language-java">package net.engineeringdigest.journalApp.security;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -1668,12 +1651,12 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
                                         Authentication authentication) throws IOException {
 
         OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
-        Map<String, Object> attributes = token.getPrincipal().getAttributes();
+        Map&lt;String, Object&gt; attributes = token.getPrincipal().getAttributes();
         String registrationId = token.getAuthorizedClientRegistrationId(); // "google" or "github"
 
         // Logging for debugging
         System.out.println("Login via: " + registrationId);
-        attributes.forEach((key, value) -> System.out.println(key + " = " + value));
+        attributes.forEach((key, value) -&gt; System.out.println(key + " = " + value));
 
         String email = null;
         String name = null;
@@ -1724,15 +1707,13 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         String refreshToken = jwtUtil.generateRefreshToken(email);
 
         // Redirect to frontend with token
-        String redirectUrl = "http://localhost:4200/login?token=" + jwt + "&refresh=" + refreshToken;
+        String redirectUrl = "http://localhost:4200/login?token=" + jwt + "&amp;refresh=" + refreshToken;
         response.sendRedirect(redirectUrl);
     }
 }
-
---- END: main\java\net\engineeringdigest\journalApp\security\OAuth2LoginSuccessHandler.java ---
-
---- START: main\java\net\engineeringdigest\journalApp\utility\JwtUtil.java ---
-package net.engineeringdigest.journalApp.utility;
+</code></pre>
+<h2>main\java\net\engineeringdigest\journalApp\utility\JwtUtil.java</h2>
+<pre><code class="language-java">package net.engineeringdigest.journalApp.utility;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwt;
@@ -1756,7 +1737,7 @@ public class JwtUtil {
     private final String SECRET_KEY = System.getProperty("jwt.secret");
 
     public String generateToken(UserDetails userDetails, Integer userId) {
-        Map<String, Object> claims = new HashMap<>();
+        Map&lt;String, Object&gt; claims = new HashMap&lt;&gt;();
         claims.put("userId", userId);
         claims.put("roles", userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
@@ -1766,12 +1747,12 @@ public class JwtUtil {
     }
 
     public String generateRefreshToken(String userName) {
-        Map<String, Object> claims = new HashMap<>();
+        Map&lt;String, Object&gt; claims = new HashMap&lt;&gt;();
         claims.put("tokenType", "REFRESH");
         return createToken(claims, userName, 1000 * 60 * 30); // 30 minutes
     }
 
-    private String createToken(Map<String, Object> claims, String userName, long expirationMillis) {
+    private String createToken(Map&lt;String, Object&gt; claims, String userName, long expirationMillis) {
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(userName)
@@ -1810,17 +1791,15 @@ public class JwtUtil {
                 .getBody();
     }
 
-    public List<String> extractRoles(String token) {
+    public List&lt;String&gt; extractRoles(String token) {
         Claims claims = extractAllClaims(token);
-        return (List<String>) claims.get("roles");
+        return (List&lt;String&gt;) claims.get("roles");
     }
 
 }
-
---- END: main\java\net\engineeringdigest\journalApp\utility\JwtUtil.java ---
-
---- START: test\java\net\engineeringdigest\journalApp\JournalAppApplicationTests.java ---
-package net.engineeringdigest.journalApp;
+</code></pre>
+<h2>test\java\net\engineeringdigest\journalApp\JournalAppApplicationTests.java</h2>
+<pre><code class="language-java">package net.engineeringdigest.journalApp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -1833,6 +1812,16 @@ class JournalAppApplicationTests {
 	}
 
 }
+</code></pre>
 
---- END: test\java\net\engineeringdigest\journalApp\JournalAppApplicationTests.java ---
-
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-tsx.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-properties.min.js"></script>
+    </body>
+    </html>
+    

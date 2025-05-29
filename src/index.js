@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 
-const sourceFolder = './main';
+const sourceFolder = '../';
 const mergedOutputFile = './kamlesh/all-code-merged.txt';
 const recreateOutputFolder = './kamlesh/restored';
 const excludedFiles = ['package-lock.json', '.DS_Store'];
@@ -49,6 +49,143 @@ function extractCodeFromFilesToSingleFile(filePaths = null) {
   fs.writeFileSync(mergedOutputFile, output, 'utf8');
   console.log(`Done! Extracted ${files.length} files into ${mergedOutputFile}`);
 }
+
+
+function extractCodeFromFilesToSingleFile(filePaths = null) {
+    const outputDir = path.dirname(mergedOutputFile);
+    const mergedHtmlOutputFile = path.join(outputDir, 'all-code-merged.html');
+    fs.mkdirSync(outputDir, { recursive: true });
+
+    const files = filePaths || getAllFilesRecursively(sourceFolder);
+    let outputText = '';
+
+    // HTML header with Prism.js and theme
+    let outputHtml = `
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>All Extracted Code</title>
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
+    <style>
+      body { font-family: Arial, sans-serif; background: #1e1e1e; color: #eee; padding: 20px; }
+      h2 { color: #61dafb; border-bottom: 1px solid #444; padding-bottom: 5px; }
+      pre { margin: 10px 0; border-radius: 6px; }
+    </style>
+  </head>
+  <body>
+  <h1>Extracted Code Files</h1>
+  `;
+
+    files.forEach(filePath => {
+      const content = fs.readFileSync(filePath, 'utf8');
+      const relativePath = path.relative('.', filePath);
+      const ext = path.extname(filePath).toLowerCase();
+      const lang = getPrismLanguage(ext);
+
+      outputText += `--- START: ${relativePath} ---\n${content}\n--- END: ${relativePath} ---\n\n`;
+
+      outputHtml += `<h2>${relativePath}</h2>\n`;
+      outputHtml += `<pre><code class="language-${lang}">${escapeHtml(content)}</code></pre>\n`;
+
+      console.log(`Extracted: ${relativePath}`);
+    });
+
+    outputHtml += `
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-tsx.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-properties.min.js"></script>
+    </body>
+    </html>
+    `;
+
+
+    fs.writeFileSync(mergedOutputFile, outputText, 'utf8');
+    fs.writeFileSync(mergedHtmlOutputFile, outputHtml, 'utf8');
+
+    console.log(`✅ Extracted ${files.length} files to:\n- ${mergedOutputFile}\n- ${mergedHtmlOutputFile}`);
+  }
+
+  /*
+  function extractCodeFromFilesToSingleFile(filePaths = null) {
+    const outputDir = path.dirname(mergedOutputFile);
+    const mergedHtmlOutputFile = path.join(outputDir, 'all-code-merged.html');
+    fs.mkdirSync(outputDir, { recursive: true });
+
+    const files = filePaths || getAllFilesRecursively(sourceFolder);
+    let outputText = '';
+    let outputHtml = `
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>All Extracted Code</title>
+    <style>
+      body { font-family: Arial, sans-serif; background: #f9f9f9; padding: 20px; }
+      h2 { background: #333; color: #fff; padding: 10px; }
+      pre { background: #eee; padding: 15px; overflow-x: auto; border-left: 5px solid #333; }
+      code { white-space: pre-wrap; font-family: Consolas, monospace; }
+    </style>
+  </head>
+  <body>
+  <h1>Extracted Code Files</h1>
+  `;
+
+    files.forEach(filePath => {
+      const content = fs.readFileSync(filePath, 'utf8');
+      const relativePath = path.relative('.', filePath);
+
+      outputText += `--- START: ${relativePath} ---\n${content}\n--- END: ${relativePath} ---\n\n`;
+
+      outputHtml += `<h2>${relativePath}</h2>\n<pre><code>${escapeHtml(content)}</code></pre>\n`;
+
+      console.log(`Extracted: ${relativePath}`);
+    });
+
+    outputHtml += `</body></html>`;
+
+    fs.writeFileSync(mergedOutputFile, outputText, 'utf8');
+    fs.writeFileSync(mergedHtmlOutputFile, outputHtml, 'utf8');
+
+    console.log(`✅ Extracted ${files.length} files to:\n- ${mergedOutputFile}\n- ${mergedHtmlOutputFile}`);
+  }
+  */
+
+  function getPrismLanguage(ext) {
+    switch (ext) {
+      case '.ts':
+      case '.tsx':
+        return 'typescript';
+      case '.js':
+        return 'javascript';
+      case '.json':
+        return 'json';
+      case '.html':
+      case '.xml':
+        return 'markup';
+      case '.java':
+        return 'java';
+      case '.properties':
+        return 'properties';
+      case '.css':
+      case '.scss':
+        return 'css';
+      default:
+        return 'clike'; // fallback
+    }
+  }
+
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
 
 function recreateFilesFromMergedFile() {
   const content = fs.readFileSync(mergedOutputFile, 'utf8');
